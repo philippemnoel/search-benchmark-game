@@ -1,0 +1,51 @@
+# workflows/deploy-pages.yml
+#
+# Publish Benchmark Results
+# Build and publish the benchmark results site to GitHub Pages. Triggered on every
+# push to main, so that results.json updates are reflected immediately.
+
+name: Publish Benchmark Results
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "results.json"
+      - "web/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-pages-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-pages:
+    name: Deploy Benchmark Results to GitHub Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v6
+
+      - name: Copy Results into Build Directory
+        run: cp results.json web/build/results.json
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
