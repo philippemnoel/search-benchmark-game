@@ -43,5 +43,11 @@ make bench
 ```
 
 You're done, make sure to note the Java / Rust / kernel versions and copy the
-results.json file on another machine before shutting this one down.
+`results.json` file on another machine before shutting this one down.
+
+To view results locally, you'll need Node.js installed, then run:
+
+```
+make serve
+```
 

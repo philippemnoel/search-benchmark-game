@@ -10,7 +10,6 @@ COMMANDS ?= TOP_10 TOP_100 TOP_1000 TOP_100_COUNT COUNT
 # ENGINES ?= tantivy-0.16 tantivy-0.17 tantivy-0.18 tantivy-0.19
 # ENGINES ?= tantivy-0.22 tantivy-0.24 tantivy-0.25 tantivy-main lucene-10.3.0 lucene-10.3.0-bp
 ENGINES ?= tantivy-0.25 lucene-10.3.0 lucene-10.3.0-bp pisa-0.8.2 iresearch-26.03.1
-PORT ?= 8080
 WARMUP_TIME ?= 60
 NUM_ITER ?= 10
 
@@ -44,5 +43,5 @@ compile:
 
 serve:
 	@echo "--- Serving results ---"
-	@cp results.json web/build/results.json
-	@cd web/build && python3 -m http.server $(PORT)
+	@mkdir -p web/public && cp results.json web/public/results.json
+	@cd web && npm run dev

@@ -4,14 +4,14 @@
 This repository is standardized benchmark for comparing the speed of various
 aspects of search engine technologies.
 
-The results are available [here](https://tantivy-search.github.io/bench/).
+The results are available [here](https://philippemnoel.github.io/search-benchmark-game/).
 
 This benchmark is both
 - **for users** to make it easy for users to compare different libraries
 - **for library** developers to identify optimization opportunities by comparing
 their implementation to other implementations.
 
-Currently, the benchmark only includes Lucene and tantivy.
+Currently, the benchmark includes Lucene, Tantivy, PISA, and IResearch.
 It is reasonably simple to add another engine.
 
 You are free to communicate about the results of this benchmark **in
@@ -83,14 +83,14 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 The lucene benchmarks requires Java, the most recent version is recommended.
-The tantivy benchmarks and benchmark driver code requires Cargo. This can be installed using [rustup](https://www.rustup.rs/).
+The Tantivy benchmarks and benchmark driver code requires Cargo. This can be installed using [rustup](https://www.rustup.rs/).
 
 ### Installing
 
 Clone this repo.
 
 ```
-git clone git@github.com:tantivy-search/search-benchmark-game.git
+git clone git@github.com:quickwit-oss/search-benchmark-game.git
 ```
 
 ## Running
@@ -118,13 +118,18 @@ make bench
 
 The results are outputted in a `results.json` file.
 
-You can then check your results out by running:
+You can then check your results out locally by running:
 
 ```
-make serve
+cd web
+npm install
+mkdir -p public && cp ../results.json public/results.json
+npm run dev
 ```
 
-And open the following in your browser: [http://localhost:8080/](http://localhost:8080/)
+And open [http://localhost:5173/](http://localhost:5173/) in your browser.
+
+Results are automatically published to GitHub Pages when `results.json` is updated on `main`.
 
 
 # Adding another search engine
