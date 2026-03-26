@@ -90,7 +90,7 @@ The Tantivy benchmarks and benchmark driver code requires Cargo. This can be ins
 Clone this repo.
 
 ```
-git clone git@github.com:tantivy-search/search-benchmark-game.git
+git clone git@github.com:quickwit-oss/search-benchmark-game.git
 ```
 
 ## Running
