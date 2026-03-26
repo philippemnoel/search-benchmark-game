@@ -4,14 +4,14 @@
 This repository is standardized benchmark for comparing the speed of various
 aspects of search engine technologies.
 
-The results are available [here](https://tantivy-search.github.io/bench/).
+The results are available [here](https://philippemnoel.github.io/search-benchmark-game/).
 
 This benchmark is both
 - **for users** to make it easy for users to compare different libraries
 - **for library** developers to identify optimization opportunities by comparing
 their implementation to other implementations.
 
-Currently, the benchmark only includes Lucene and tantivy.
+Currently, the benchmark includes Lucene, tantivy, PISA, and IResearch.
 It is reasonably simple to add another engine.
 
 You are free to communicate about the results of this benchmark **in
@@ -118,13 +118,18 @@ make bench
 
 The results are outputted in a `results.json` file.
 
-You can then check your results out by running:
+You can then check your results out locally by running:
 
 ```
-make serve
+cd web
+npm install
+mkdir -p public && cp ../results.json public/results.json
+npm run dev
 ```
 
-And open the following in your browser: [http://localhost:8080/](http://localhost:8080/)
+And open the URL shown in the terminal (typically [http://localhost:5173/](http://localhost:5173/)).
+
+Results are automatically published to GitHub Pages when `results.json` is updated on `main`.
 
 
 # Adding another search engine
